@@ -34,11 +34,14 @@ module.exports = {
   target: 'web',
   devtool: 'eval',
   entry: {
-    main: [
-      ...extraEntryFiles,
-      '@shopify/polaris/styles.css',
-      path.resolve(__dirname, '../client/index.js'),
+    frontend:[
+        ...extraEntryFiles,'@shopify/polaris/styles.css',
+        path.resolve(__dirname, '../frontend/index.js'),
     ],
+      dashboard:[
+      ...extraEntryFiles,'@shopify/polaris/styles.css',
+      path.resolve(__dirname, '../Dashboard/index.js'),
+      ]
   },
   output: {
     filename: '[name].js',
@@ -51,6 +54,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
+        query: { presets: ['es2015', 'react'], plugins: ["transform-decorators-legacy", "transform-class-properties"] },
         exclude: /node_modules/,
       },
       {
@@ -65,8 +69,7 @@ module.exports = {
             query: {
               sourceMap,
               modules: true,
-              importLoaders: 1,
-              localIdentName: '[name]-[local]_[hash:base64:5]',
+              importLoaders: 1
             },
           },
           {
