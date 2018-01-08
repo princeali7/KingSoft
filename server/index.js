@@ -126,7 +126,7 @@ const {routes, middleware} = shopify;
 const {withShop, withWebhook} = middleware;
 app.use(function (req, res, next) {
         if(!req.path.startsWith('/api/') && !req.path.startsWith('/dashboard')){
-            next(); return;
+            next(); return; 
         }
     let DB= new SQLStrategy();
 
